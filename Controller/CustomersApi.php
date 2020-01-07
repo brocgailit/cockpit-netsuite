@@ -12,13 +12,14 @@ class CustomersApi extends Controller {
 	public function __construct($options) {
 		parent::__construct($options);
 		$this->options = $options;
+		$config = $this->app['config']['netsuite'];
         $this->netsuite = new NetSuiteEndpoint(
-            "https://{$options['account']}.suitetalk.api.netsuite.com/rest/platform/v1/record/customer",
+            "https://{$config['account']}.suitetalk.api.netsuite.com/rest/platform/v1/record/customer",
             [
-				'consumer_key'    => $options['consumer_key'],
-				'consumer_secret' => $options['consumer_secret'],
-				'token'           => $options['token_id'],
-				'token_secret'    => $options['token_secret']
+				'consumer_key'    => $config['consumer_key'],
+				'consumer_secret' => $config['consumer_secret'],
+				'token'           => $config['token_id'],
+				'token_secret'    => $config['token_secret']
 			]
         );
     }
@@ -28,7 +29,6 @@ class CustomersApi extends Controller {
 	}
 
 	public function customer($customer_id = '') {
-		return 'consumer_key';
 		if($this->req_is('post')) {
 			$data = json_decode(file_get_contents('php://input'), true);
 			return $this->netsuite->post('', $data);
