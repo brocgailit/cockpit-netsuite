@@ -18,6 +18,7 @@ class NetSuiteEndpoint {
 		$this->client = new Client([
 			'base_uri' => $base_uri,
 			'handler' => $stack,
+			'http_errors' => false,
 			'auth' => 'oauth'
 		]);
 	}
