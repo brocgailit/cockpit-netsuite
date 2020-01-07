@@ -33,7 +33,13 @@ class NetSuiteEndpoint {
 			$res = $this->client->request('POST', $endpoint, [
 				'json' => $data
 			]);
-			return json_decode($res->getBody(), true);
+			if($res->getBody()) {
+				return json_decode($res->getBody(), true);
+			} else {
+				// this is mostly a hack, but lets return the last segment of the location
+				$location = $res->getHeader('Location');
+				return $location;
+			}
 		} catch (ClientException $e) {
 			$res = $e->getResponse();
 			return json_decode($res->getBody()->getContents(), true);
