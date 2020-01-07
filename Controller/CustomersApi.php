@@ -8,11 +8,13 @@ use NetSuite\Controller\NetSuiteEndpoint;
 class CustomersApi extends Controller {
 	private $netsuite;
 	private $options;
+	private $config;
 
 	public function __construct($options) {
 		parent::__construct($options);
 		$this->options = $options;
 		$config = $this->app['config']['netsuite'];
+		$this->config = $config;
         $this->netsuite = new NetSuiteEndpoint(
             "https://{$config['account']}.suitetalk.api.netsuite.com/rest/platform/v1/record/customer/",
             [
@@ -29,6 +31,7 @@ class CustomersApi extends Controller {
 	}
 
 	public function customer($customer_id = '') {
+		return $this->config;
 		if($this->req_is('post')) {
 			$data = json_decode(file_get_contents('php://input'), true);
 			return $this->netsuite->post('', $data);
