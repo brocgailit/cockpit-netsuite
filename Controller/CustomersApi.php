@@ -18,10 +18,13 @@ class CustomersApi extends Controller {
         $this->netsuite = new NetSuiteEndpoint(
             "https://{$config['account']}.suitetalk.api.netsuite.com/rest/platform/v1/record/customer/",
             [
-				'consumer_key'    => $config['consumer_key'],
-				'consumer_secret' => $config['consumer_secret'],
-				'token'           => $config['token_id'],
-				'token_secret'    => $config['token_secret']
+				'consumer_key'    	=> $config['consumer_key'],
+				'consumer_secret' 	=> $config['consumer_secret'],
+				'token'           	=> $config['token_id'],
+				'token_secret'    	=> $config['token_secret'],
+				'signature_method'	=> 'HMAC-SHA256',
+				'version'			=> '1.0',
+				'realm'				=> $config['account']
 			]
         );
     }
