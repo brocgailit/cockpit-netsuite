@@ -38,7 +38,7 @@ class NetSuiteEndpoint {
 				$location = $res->getHeader('Location');
 				return [
 					'status' => 'success',
-					'id' => basename($location)
+					'id' => $location
 				];
 			} else {
 				return json_decode($res->getBody(), true);
