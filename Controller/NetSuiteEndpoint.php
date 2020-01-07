@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+use GuzzleHttp\Exception\ClientException;
 
 class NetSuiteEndpoint {
 	private $client;
@@ -27,10 +28,14 @@ class NetSuiteEndpoint {
 	}
 
 	public function post($endpoint = '', $data) {
-		$res = $this->client->request('POST', $endpoint, [
-			'json' => $data
-		]);
-		return json_decode($res->getBody(), true);
+		try {
+			$res = $this->client->request('POST', $endpoint, [
+				'json' => $data
+			]);
+			return json_decode($res->getBody(), true);
+		} catch (ClientException $e) {
+			return Psr7\str($e->getResponse());
+		}
 	}
 
 	public function delete($endpoint) {
