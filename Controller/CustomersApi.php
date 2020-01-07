@@ -8,13 +8,6 @@ use NetSuite\Controller\NetSuiteEndpoint;
 class CustomersApi extends Controller {
 	private $netsuite;
 	private $options;
-	
-	[
-		'consumer_key'    => 'my_key',
-		'consumer_secret' => 'my_secret',
-		'token'           => 'my_token',
-		'token_secret'    => 'my_token_secret'
-	]
 
 	public function __construct($options) {
 		parent::__construct($options);
