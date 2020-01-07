@@ -16,22 +16,18 @@ class NetSuiteEndpoint {
 		$stack->push($middleware);
 		$this->client = new Client([
 			'base_uri' => $base_uri,
-			'handler' => $stack
+			'handler' => $stack,
+			'auth' => 'oauth'
 		]);
 	}
 
-	public function query($endpoint = '', $options = []) {
-		$q = Psr7\build_query($options);
-		$res = $this->client->request('GET', $endpoint, [
-			'auth' => 'oauth',
-			'query' => $q
-		]);
+	public function query($endpoint = '') {
+		$res = $this->client->request('GET', $endpoint);
 		return json_decode($res->getBody(), true);
 	}
 
 	public function post($endpoint = '', $data) {
 		$res = $this->client->request('POST', $endpoint, [
-			'auth' => 'oauth',
 			'json' => $data
 		]);
 		return json_decode($res->getBody(), true);
@@ -42,9 +38,7 @@ class NetSuiteEndpoint {
 			return 'Please provide a valid endpoint';
 		}
 
-		$res = $this->client->request('DELETE', $endpoint, [
-			'auth' => 'oauth'
-		]);
+		$res = $this->client->request('DELETE', $endpoint);
 
 		return json_decode($res->getBody(), true);
 	}

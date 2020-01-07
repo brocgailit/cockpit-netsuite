@@ -31,7 +31,6 @@ class CustomersApi extends Controller {
 	}
 
 	public function customer($customer_id = '') {
-		return $this->config;
 		if($this->req_is('post')) {
 			$data = json_decode(file_get_contents('php://input'), true);
 			return $this->netsuite->post('', $data);
@@ -41,7 +40,7 @@ class CustomersApi extends Controller {
 			return $this->netsuite->delete($customer_id);
 		} */
 
-		return $this->netsuite->query($customer_id, []);
+		return $this->netsuite->query($customer_id);
 		/* param example [
 			'limit' => $this->app->param('limit') ?: 100,
 			'offset' => $this->app->param('offset') ?: 0,
