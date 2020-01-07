@@ -44,6 +44,7 @@ class NetSuiteEndpoint {
 			$res = $e->getResponse();
 			return json_decode($res->getBody()->getContents(), true);
 		}
+		return 'something else happened here...';
 	}
 
 	public function delete($endpoint) {
