@@ -4,6 +4,7 @@ namespace NetSuite\Controller;
 
 use \LimeExtra\Controller;
 use NetSuite\Controller\NetSuiteEndpoint;
+use GuzzleHttp\Subscriber\Oauth\Oauth1;
 
 class CustomersApi extends Controller {
 	private $netsuite;
@@ -22,7 +23,7 @@ class CustomersApi extends Controller {
 				'consumer_secret' 	=> $config['consumer_secret'],
 				'token'           	=> $config['token_id'],
 				'token_secret'    	=> $config['token_secret'],
-				'signature_method'	=> 'HMAC-SHA256',
+				'signature_method'	=> Oauth1::SIGNATURE_METHOD_HMACSHA256,
 				'version'			=> '1.0',
 				'realm'				=> $config['account']
 			]
