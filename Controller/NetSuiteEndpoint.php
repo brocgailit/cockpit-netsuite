@@ -36,7 +36,10 @@ class NetSuiteEndpoint {
 			if($res->getStatusCode() === 204) {
 				// this is mostly a hack, but lets return the last segment of the location
 				$location = $res->getHeader('Location');
-				return explode("/", $location);
+				return [
+					'status' => 'success',
+					'id' => basename($location)
+				];
 			} else {
 				return json_decode($res->getBody(), true);
 			}
