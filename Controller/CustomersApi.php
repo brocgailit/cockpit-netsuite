@@ -28,7 +28,7 @@ class CustomersApi extends Controller {
 	}
 
 	public function customer($customer_id = '') {
-		return $this->options['consumer_key'];
+		return 'consumer_key';
 		if($this->req_is('post')) {
 			$data = json_decode(file_get_contents('php://input'), true);
 			return $this->netsuite->post('', $data);
