@@ -29,6 +29,7 @@ class NetSuiteEndpoint {
 	}
 
 	public function post($endpoint = '', $data) {
+		return 'nothing to see here';
 		try {
 			$res = $this->client->request('POST', $endpoint, [
 				'json' => $data
