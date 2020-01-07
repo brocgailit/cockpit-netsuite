@@ -34,8 +34,8 @@ class NetSuiteEndpoint {
 			]);
 			return json_decode($res->getBody(), true);
 		} catch (ClientException $e) {
-			$res = Psr7\str($e->getResponse());
-			return json_decode($res->getBody(), true);
+			$res = $e->getResponse();
+			return $res->getBody()->getContents();
 		}
 	}
 
