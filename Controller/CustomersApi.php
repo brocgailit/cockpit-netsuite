@@ -17,7 +17,7 @@ class CustomersApi extends Controller {
 		$config = $this->app['config']['netsuite'];
 		$this->config = $config;
         $this->netsuite = new NetSuiteEndpoint(
-            "https://{$config['account']}.suitetalk.api.netsuite.com/rest/platform/v1/record/customer/",
+            "https://{$config['account']}.suitetalk.api.netsuite.com/services/rest/record/v1/customer/",
             [
 				'consumer_key'    	=> $config['consumer_key'],
 				'consumer_secret' 	=> $config['consumer_secret'],
